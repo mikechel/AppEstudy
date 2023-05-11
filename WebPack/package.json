@@ -1,0 +1,23 @@
+{
+  "name": "appestudy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "babel ./src/main.js -o ./public/bundle.js -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikechel/AppEstudy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikechel/AppEstudy/issues"
+  },
+  "homepage": "https://github.com/mikechel/AppEstudy#readme",
+  "devDependencies": {
+
+  }
+}
