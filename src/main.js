@@ -6,6 +6,7 @@ console.log(person)
 person.name = "Oliveira"
 
 console.log(person)
+
 // forEach ele execura uma função para cada elemento do array
 const cores = ["Verde", "Amarelo", "Azul", "Branco"];
 function imprimir(item){
@@ -55,7 +56,7 @@ function maiorNome(item, indice){
 }
 nome2.forEach(maiorNome);
 console.log(nome);
-//------------------
+//------------------ Ele esta pegando o arrys e fazendo uma opoeração para cada elemento do arrys e armazendando no mesmo array forEach
 const numbers = [1, 2, 3, 4, 5]
 
 numbers.forEach(function(number, index){
@@ -63,11 +64,12 @@ numbers.forEach(function(number, index){
   numbers[index] = number + 1
 })
 console.log(numbers)
-
+//------------------- map está pegando o array realizando a operação e armanzendo em um novo array
 const newNumbers = numbers.map(function(number){
   return number + 2
 })
 console.log(newNumbers)
+
 
 const total = numbers.reduce(function(total, next){
   return total + next
@@ -83,7 +85,7 @@ const todos = [
 
 const doneTodos = todos.filter(function(todo){
   // return todo.done;
-  return todo.text === "Dobrar as roupas"
+  return todo.done === false
 });
 
 console.log(doneTodos);
@@ -95,7 +97,7 @@ const find = todos.find(function (todo){
 })
 console.log(find);
 
-//find retornar o index do array
+//findIndex retornar o index do array
 
 const index = todos.findIndex(function(todo){
   return todo.text == "Dobrar as roupas"
@@ -105,13 +107,13 @@ console.log(index);
 //  some
 const nome3 = ["Alberto", "Alex", "Sandro", "Ana Roberta", "Michel Ferreira"];
 const hasNome = nome3.some(function(nome3){
-  return nome3 === "Alberto";
+  return nome3 === "Sandro";
 });
 
 console.log(hasNome);
 
 
-//--- arrow functions
+//--- arrow functions function inline
 const meusNomes = nome3.filter((nome3)=> nome3 === "Alex");
 console.log(meusNomes);
 
@@ -145,7 +147,7 @@ const product = {
 
 console.log(product);
 
-// --- Desestruturação de array
+// --- Desestruturação de array  - pode pular o valor não considerado apresentando somente o valor vazio seguido de virgula ", ,"
 
 const fruits = ["Maça", "Morango", "Uva", "Banana"];
 
@@ -178,7 +180,7 @@ console.log(firstName, secondName, city)
 showFullName(persons);
 
 
-// -- Resto - Spread array
+// -- Resto - Spread array, ira pegar o valor restante apos os valores declarados, armazena o valor do resto do array ou objeto na variavel apos os tres pontos "...rest"
 const [primeiro, segundo, ...rest] = fruits;
 console.log(rest);
 
@@ -196,5 +198,110 @@ const per = {
 const {fName, secondName, ...rests} = per;
 console.log(rests);
 
+// função construtora, o this referece a ele mesmo no escopo do obj
+
+function Car(brand, price){
+  this.brand = brand;
+  this.price = price;
+}
+
+const civic = new Car('Honda', 130);
+const hb20 = new Car('Hyundai', 80);
+console.log(civic);
+console.log(hb20);
+
+//----- Classes
+
+class Cars {
+  constructor(brand, price){
+    this.brand = brand;
+    this.price = price;
+  }
+
+  run(){
+    console.log("correr");
+  }
+}
+const civics = new Cars('City', 150);
+console.log(civics);
+civics.run();
+
+// --- Trabalhando com as propriedades das classes com os metodos GET E SET
+
+class Pessoas {
+  constructor(novoNome){
+    this._novoNome = novoNome;
+  }
+
+  get novoNome(){
+    return this._novoNome;
+  }
+
+  set novoNome(novoNome){
+    this._novoNome = novoNome;
+  }
+
+}
+
+const pessoas = new Pessoas('Michel Moreira Ferreira');
+pessoas.novoNome = "Michel Vinicius Moreira Ferreira";
+console.log(pessoas.novoNome);
 
 
+// funçoes metodos estaticos de classes
+
+class pessoa2 {
+  constructor(firstName, secondName){
+    this.firstName= firstName;
+    this.secondName = secondName;
+  }
+
+  get fullName(){
+    return pessoa2.joinNames(this.firstName, this.secondName);
+  }
+
+  static joinNames(firstName, secondName){
+    return `${firstName} ${secondName}`
+  }
+}
+
+const pessoa = new pessoa2("Michel", "Vinicius");
+
+console.log(pessoa.fullName);
+
+// Herença
+
+class Veiculo {
+  constructor(rodas){
+    this.rodas = rodas
+  }
+
+  acelerar(){
+    console.log("Acelerou");
+  }
+}
+class Moto extends Veiculo{
+constructor(rodas, capacete){
+  super(rodas);
+  this.capacete = capacete;
+}
+
+  empinar(){
+    console.log(`Empinou com ${this.rodas} rodas`);
+  }
+
+  acelerar(){
+    super.acelerar();
+    console.log("Acelerou muuuito com a moto")
+  }
+
+  taUsandoCapacete(){
+    console.log(this.capacete);
+  }
+}
+
+const bross = new Moto (2, true);
+
+bross.acelerar();
+bross.empinar();
+bross.taUsandoCapacete();
